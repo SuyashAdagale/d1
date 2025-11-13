@@ -1,0 +1,32 @@
+%QAM2
+
+clc;
+clear all;
+close all;
+
+M_values = [4 16 64];   % QAM orders
+SNR = 10;                % SNR in dB
+N = 1000;                % Number of symbols
+
+for i = 1:length(M_values)
+    M = M_values(i);
+
+    % Random data symbols
+    x = randi([0 M-1], N, 1);
+
+    % Modulation
+    y = qammod(x, M);
+
+    % Add AWGN
+    yn = awgn(y, SNR, 'measured');
+
+    % Scatterplot without noise
+    figure;
+    scatterplot(y);
+    title(['Scatterplot of ' num2str(M) '-QAM (Without Noise)']);
+
+    % Scatterplot with AWGN
+    figure;
+    scatterplot(yn);
+    title(['Scatterplot of ' num2str(M) '-QAM (With AWGN, SNR = ' num2str(SNR) ' dB)']);
+end
