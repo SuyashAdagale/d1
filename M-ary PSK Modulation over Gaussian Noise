@@ -1,0 +1,26 @@
+% Title: M-ary PSK Modulation over Gaussian Noise
+
+clear all; 
+close all;
+clc;
+
+SNR = 10;                              % Signal-to-Noise Ratio in dB
+k = input('Enter the no. of bits per symbol: ');  % Input from user
+M = 2^k;                               % Modulation order (e.g., 4 for QPSK)
+
+data = randi([0 M-1], 1000, 1);        % Random integer data symbols
+y1 = pskmod(data, M);                  % M-PSK modulation
+
+y1n = awgn(y1, SNR, 'measured');       % Add AWGN noise
+
+
+% Plot original and noisy constellations
+figure;
+subplot(1,2,1);
+scatterplot(y1);
+title(['M-PSK Constellation without Noise (M = ' num2str(M) ')']);
+
+subplot(1,2,2);
+scatterplot(y1n);
+title(['M-PSK Constellation with AWGN (SNR = ' num2str(SNR) ' dB)']);
+
