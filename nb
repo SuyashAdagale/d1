@@ -1,0 +1,54 @@
+% Huffman Coding
+%
+% Formulas
+%
+% 1) Entropy
+%    H = summation[k=1 to m] ( Pk * log2(1/Pk) )
+%
+% 2) Average Length
+%    L = summaqtion[k=1 to m] ( Pk * length_of_codeword)
+%
+% 3) Efficiency (eta)
+%    eta = (H / L) * 100
+%
+% 4) Redundancy
+%    Redundancy = 1 - eta
+
+
+% Linear Block Code Formulas
+%
+% 1) Codeword (X)
+%    X = [M] * [G]
+%         |     |
+%         |     Generator Matrix
+%         message
+%         matrix
+%
+% 2) Generator Matrix (G)
+%    [G] = [I | P]
+%           |   |
+%           |   P matrix
+%           Identity matrix (diagonal element)
+%
+% 3) Parity Matrix (B)
+%    [B] = [M] * [P]
+%    (Note: Image also shows [M G] and [M P])
+%
+% 4) Parity Check Matrix (H)
+%    [H] = [P' | I]
+%    (Where P' is the transpose of P)
+%
+% 5) Syndrome (S)
+%    S = Y * H'
+%    (Where Y is the received vector and H' is the transpose of H)
+
+
+
+
+
+
+
+
+
+
+
