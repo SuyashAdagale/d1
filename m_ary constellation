@@ -1,0 +1,31 @@
+m_ary constellation 
+clc;
+clear all;
+close all;
+
+% ===================== PARAMETERS ===================== %
+Eb_No_dB = 0:0.5:35;    % Eb/No range in dB
+
+% ===================== BER CALCULATIONS ===================== %
+% Using built-in theoretical BER function for PSK modulation
+BER_2 = berawgn(Eb_No_dB, 'psk', 2, 'nondiff');   % BPSK
+BER_8 = berawgn(Eb_No_dB, 'psk', 8, 'nondiff');   % 8-PSK
+BER_16 = berawgn(Eb_No_dB, 'psk', 16, 'nondiff'); % 16-PSK
+BER_32 = berawgn(Eb_No_dB, 'psk', 32, 'nondiff'); % 32-PSK
+
+% ===================== PLOTTING ===================== %
+figure;
+semilogy(Eb_No_dB, BER_2, 'g', 'LineWidth', 1.5);
+hold on;
+semilogy(Eb_No_dB, BER_8, 'k', 'LineWidth', 1.5);
+semilogy(Eb_No_dB, BER_16, 'm', 'LineWidth', 1.5);
+semilogy(Eb_No_dB, BER_32, 'b', 'LineWidth', 1.5);
+grid on;
+
+axis([0 35 1e-5 1]);
+legend('BPSK (M=2)', '8-PSK (M=8)', '16-PSK (M=16)', '32-PSK (M=32)');
+xlabel('E_b / N_0 (dB)');
+ylabel('Bit Error Rate (BER)');
+title('Performance of M-ary PSK over AWGN Channel');
+
+
