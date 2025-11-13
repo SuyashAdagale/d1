@@ -1,0 +1,120 @@
+clc;
+clear all;
+close all;
+
+% ====== Input Section ======
+symbols = input('Enter the symbols: ');
+prob = input('Enter the Probabilities: ');
+
+% ====== Huffman Dictionary ======
+[dict, avglen] = huffmandict(symbols, prob);
+
+% Display Huffman Dictionary
+temp = dict;
+for i = 1:length(temp)
+    temp{i,2} = num2str(temp{i,2});
+end
+disp(' ');
+disp('================== HUFFMAN DICTIONARY ==================');
+disp(' Symbol      Huffman Code');
+disp(temp);
+
+% ====== Generate Random Source ======
+actualsig = randsrc(100, 1, [symbols; prob]);
+disp(' ');
+disp('Original Signal:');
+disp(actualsig');
+
+% ====== Encode and Decode ======
+encoded = huffmanenco(actualsig, dict);
+decoded = huffmandeco(encoded, dict);
+
+disp(' ');
+disp('Encoded Huffman Code:');
+disp(encoded');
+disp('Decoded Signal:');
+disp(decoded');
+
+% ====== Performance Metrics ======
+% Average Code Length (L)
+L = 0;
+for i = 1:length(prob)
+    L = L + prob(i) * length(dict{i,2});
+end
+
+% Entropy (H)
+H = -sum(prob .* log2(prob));
+
+% Efficiency (η) and Redundancy (R)
+efficiency = (H / L) * 100;
+redundancy = 100 - efficiency;
+
+% ====== Display Results ======
+fprintf('\n========= PERFORMANCE RESULTS =========\n');
+fprintf('Average Code Length (L) = %.3f bits/symbol\n', L);
+fprintf('Entropy (H) = %.3f bits/symbol\n', H);
+fprintf('Coding Efficiency (η) = %.2f %%\n', efficiency);
+fprintf('Redundancy (R) = %.2f %%\n', redundancy);
+clc;
+clear all;
+close all;
+
+% ====== Input Section ======
+symbols = input('Enter the symbols: ');
+prob = input('Enter the Probabilities: ');
+
+% ====== Huffman Dictionary ======
+[dict, avglen] = huffmandict(symbols, prob);
+
+% Display Huffman Dictionary
+temp = dict;
+for i = 1:length(temp)
+    temp{i,2} = num2str(temp{i,2});
+end
+disp(' ');
+disp('================== HUFFMAN DICTIONARY ==================');
+disp(' Symbol      Huffman Code');
+disp(temp);
+
+% ====== Generate Random Source ======
+actualsig = randsrc(100, 1, [symbols; prob]);
+disp(' ');
+disp('Original Signal:');
+disp(actualsig');
+
+% ====== Encode and Decode ======
+encoded = huffmanenco(actualsig, dict);
+decoded = huffmandeco(encoded, dict);
+
+disp(' ');
+disp('Encoded Huffman Code:');
+disp(encoded');
+disp('Decoded Signal:');
+disp(decoded');
+
+% ====== Performance Metrics ======
+% Average Code Length (L)
+L = 0;
+for i = 1:length(prob)
+    L = L + prob(i) * length(dict{i,2});
+end
+
+% Entropy (H)
+H = -sum(prob .* log2(prob));
+
+% Efficiency (η) and Redundancy (R)
+efficiency = (H / L) * 100;
+redundancy = 100 - efficiency;
+
+% ====== Display Results ======
+fprintf('\n========= PERFORMANCE RESULTS =========\n');
+fprintf('Average Code Length (L) = %.3f bits/symbol\n', L);
+fprintf('Entropy (H) = %.3f bits/symbol\n', H);
+fprintf('Coding Efficiency (η) = %.2f %%\n', efficiency);
+fprintf('Redundancy (R) = %.2f %%\n', redundancy);
+
+
+
+Output Values:-
+Enter the symbols:[1 2 3 4 5]
+Enter the Probabilities:[0.4 0.2 0.2 0.1 0.1]
