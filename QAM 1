@@ -1,0 +1,34 @@
+%QAM 1
+clc; % Clear the command window
+clear all; % Remove all variables from the workspace
+close all; % Close all open figure windows
+
+Eb_No_dB = 0:0.5:35; % Define the Eb/No range in dB (from 0 to 35 with 0.5 step)
+
+M = 4; % Set the first modulation order (4-QAM)
+BER_4 = berawgn(Eb_No_dB, "qam", M, "nondiff"); % Calculate theoretical BER for 4-QAM using AWGN channel
+
+M_16 = 16; % Set the second modulation order (16-QAM)
+BER_16 = berawgn(Eb_No_dB, "qam", M_16, "nondiff"); % Calculate theoretical BER for 16-QAM
+
+M_64 = 64; % Set the third modulation order (64-QAM)
+BER_64 = berawgn(Eb_No_dB, "qam", M_64, "nondiff"); % Calculate theoretical BER for 64-QAM
+
+figure(1); % Open a new figure window for plotting
+
+% Plot BER vs Eb/No using semilogarithmic scale for all modulation schemes
+semilogy(Eb_No_dB, BER_4, 'g'); % Plot BER curve for 4-QAM in green
+hold on; % Hold the plot to overlay next curves
+semilogy(Eb_No_dB, BER_16, 'k'); % Plot BER curve for 16-QAM in black
+hold on; % Hold again for next plot
+semilogy(Eb_No_dB, BER_64, 'm'); % Plot BER curve for 64-QAM in magenta
+
+grid on; % Enable grid on the graph for better readability
+
+axis([0 35 1e-5 1]); % Set the axis limits: x-axis (0–35), y-axis (10^-5 to 1)
+
+% Add labels, legend, and title to the plot
+legend('4QAM AWGN channel', '16QAM AWGN channel', '64QAM AWGN channel'); % Define the legend
+xlabel('Eb/No'); % Label the x-axis as Eb/No
+ylabel('BER'); % Label the y-axis as Bit Error Rate
+title('M-QAM Modulation over Gaussian noise'); % Add title to the graph is this  code correct for 
